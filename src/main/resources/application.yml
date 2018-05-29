@@ -1,21 +1,26 @@
 spring:
   application:
-    name: mybatis
+    name: mapper
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://192.168.6.132:3306/sell?useSSL=false&characterEncoding=utf-8
+    url: jdbc:mysql://192.168.6.133:3306/sell?useSSL=false&characterEncoding=utf-8
 
 server:
   port: 8888
   servlet:
-    context-path: /mybatis
+    context-path: /mapper
 logging:
   level:
     com.sml.mybatis.mapper: debug
-  pattern:
-    console: "%d - %msg"
+#    mybatis 配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+  type-aliases-package: com.sml.mybatis.pojo
+#  pattern:
+#    console: "%d - %msg"
 
 
 

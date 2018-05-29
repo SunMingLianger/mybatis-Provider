@@ -2,6 +2,7 @@ package com.sml.mybatis.mapper;
 
 import com.sml.mybatis.MybatisApplicationTests;
 import com.sml.mybatis.pojo.SellerInfo;
+import com.sml.mybatis.pojo.SellerInfoExample;
 import com.sml.mybatis.utils.IDGenerateutil;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
@@ -17,7 +18,7 @@ import java.util.Date;
 @Component
 public class SellerInfoMapperTest extends MybatisApplicationTests
 {
-    @Autowired
+   /* @Autowired
     SqlSessionFactory sessionFactory;
 
     @Test
@@ -25,8 +26,12 @@ public class SellerInfoMapperTest extends MybatisApplicationTests
     {
         SellerInfo sellerInfo = sessionFactory.openSession().getMapper(SellerInfoMapper.class).f1indSellerById(1);
 
+        if (sellerInfo == null)
+        {
+            throw new RuntimeException("无法查询到该用户的信息，请核对后再来咨询！");
+        }
         System.out.println(sellerInfo);
-    }
+    }*/
 
     @Autowired
     private SellerInfoMapper mapper;
@@ -68,5 +73,14 @@ public class SellerInfoMapperTest extends MybatisApplicationTests
         SellerInfo sellerInfo = new SellerInfo();
         sellerInfo.setOpenid("110");
         mapper.deleteSeller(sellerInfo);
+    }
+
+    @Test
+    public void test21()
+    {
+        SellerInfoExample example = new SellerInfoExample();
+        example.createCriteria().andUsernameLike("%n");
+        int i = mapper.countByExample(example);
+        System.out.println(i);
     }
 }

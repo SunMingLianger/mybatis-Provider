@@ -1,16 +1,34 @@
 package com.sml.mybatis.mapper;
 
 import com.sml.mybatis.pojo.SellerInfo;
+import com.sml.mybatis.pojo.SellerInfoExample;
 import com.sml.mybatis.provider.SellerInfoProdiver;
 import org.apache.ibatis.annotations.*;
 
-/**
- * Created by 神迷的亮
- * 2018-05-24 11:22
- */
-@Mapper
+import java.util.List;
 public interface SellerInfoMapper
 {
+    int countByExample(SellerInfoExample example);
+
+    int deleteByExample(SellerInfoExample example);
+
+    int deleteByPrimaryKey(String id);
+
+    int insert(SellerInfo record);
+
+    int insertSelective(SellerInfo record);
+
+    List<SellerInfo> selectByExample(SellerInfoExample example);
+
+    SellerInfo selectByPrimaryKey(String id);
+
+    int updateByExampleSelective(@Param("record") SellerInfo record, @Param("example") SellerInfoExample example);
+
+    int updateByExample(@Param("record") SellerInfo record, @Param("example") SellerInfoExample example);
+
+    int updateByPrimaryKeySelective(SellerInfo record);
+
+    int updateByPrimaryKey(SellerInfo record);
 
     @SelectProvider(type = SellerInfoProdiver.class, method = "findSellerById")
     SellerInfo f1indSellerById(Integer id);
